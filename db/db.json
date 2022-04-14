@@ -1,6 +1,6 @@
 [
     {
-        "titleNote":"Test Title",
-        "textNote":"Test text"
+        "title":"Test Title",
+        "text":"Test text"
     }
 ]
