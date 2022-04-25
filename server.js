@@ -3,8 +3,8 @@ const path = require("path");
 const noteData = require("./db/db.json");
 const routehtml = require("./routes/htmlRoute");
 const routeApi = require("./routes/apiRoute");
-const PORT = process.env.PORT || 3001;
-const id = require("./helper/id");
+const PORT = 3001;
+// const uuid = require("./helper/id");
 
 const app = express();
 
@@ -16,37 +16,38 @@ app.use(express.static("public"));
 app.use("/api", routeApi);
 app.use("/", routehtml);
 
-// app.post("/notes", (req, res) => {
+// app.post("/", (req, res) => {
 //   // Log that a POST request was received
 //   console.info(`${req.method} request received to add a review`);
 
 //   // Destructuring assignment for the items in req.body
-//   const { text, title } = req.body;
+//   const { product, review, username } = req.body;
 
 //   // If all the required properties are present
-//   if (text && title) {
+//   if (product && review && username) {
 //     // Variable for the object we will save
-//     const newtask = {
-//       text,
-//       title,
-//       review_id: id(),
+//     const newReview = {
+//       product,
+//       review,
+//       username,
+//       // review_id: uuid(),
 //     };
 
 //     // Obtain existing reviews
-//     fs.readFile("./db/db.json", "utf8", (err, data) => {
+//     fs.readFile("./db/reviews.json", "utf8", (err, data) => {
 //       if (err) {
 //         console.error(err);
 //       } else {
 //         // Convert string into JSON object
-//         const parsedNotes = JSON.parse(data);
+//         const parsedReviews = JSON.parse(data);
 
 //         // Add a new review
-//         parsedNotes.push(newtask);
+//         parsedReviews.push(newReview);
 
 //         // Write updated reviews back to the file
 //         fs.writeFile(
-//           "./db/db.json",
-//           JSON.stringify(parsedNotes, null, 4),
+//           "./db/reviews.json",
+//           JSON.stringify(parsedReviews, null, 4),
 //           (writeErr) =>
 //             writeErr
 //               ? console.error(writeErr)
@@ -57,7 +58,7 @@ app.use("/", routehtml);
 
 //     const response = {
 //       status: "success",
-//       body: newtask,
+//       body: newReview,
 //     };
 
 //     console.log(response);
@@ -75,6 +76,8 @@ app.use("/", routehtml);
 //   res.sendFile(path.join(__dirname, "index.html"));
 // });
 // res.json(`${req.method} request received`);
+
+app.get("/api/notes", (req, res) => res.json(noteData));
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
